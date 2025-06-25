@@ -11,25 +11,10 @@
             font-family: 'Segoe UI', sans-serif;
         }
 
-        .nav-right, .nav-left {
+        .nav-left, .nav-right {
             display: flex;
             align-items: center;
             gap: 15px;
-        }
-
-        .login-button {
-            background-color: #d40000;
-            color: white;
-            padding: 8px 18px;
-            border: none;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 14px;
-            transition: background-color 0.3s ease;
-        }
-
-        .login-button:hover {
-            background-color: #a30000;
         }
 
         nav ul {
@@ -47,9 +32,19 @@
             padding: 8px;
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
+        .login-button {
+            background-color: #d40000;
+            color: white;
+            padding: 8px 18px;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-button:hover {
+            background-color: #a30000;
         }
 
         .logo img {
@@ -60,36 +55,44 @@
             width: 24px;
             height: 24px;
         }
+
+        .search-icon {
+            width: 20px;
+            height: 20px;
+            margin-top: 3px;
+        }
     </style>
 
     <div class="nav-container">
 
-        <!-- ✅ اليسار: الشعار -->
+        <!-- ✅ يمين: الشعار -->
         <div class="logo">
             <img src="{% static 'gawal1.png' %}" alt="شعار عالم الجوال" style="background-color: transparent; border: none;">
         </div>
 
-        <!-- ✅ الوسط: روابط التنقل -->
+        <!-- ✅ الوسط: روابط إضافية -->
         <nav>
             <ul>
                 <li><a href="/">الرئيسية</a></li>
+                <li><a href="/bestsellers/">الأكثر مبيعًا</a></li>
+                <li><a href="/about/">من نحن</a></li>
+                <li>
+                    <a href="/search/">
+                        <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="بحث" class="search-icon" title="بحث">
+                    </a>
+                </li>
             </ul>
         </nav>
 
-        <!-- ✅ اليمين: تسجيل الدخول + السلة + العلم -->
+        <!-- ✅ اليسار: تسجيل الدخول + السلة + علم السعودية -->
         <div class="nav-left">
-
-            <!-- علم السعودية -->
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Emblem_of_Saudi_Arabia.svg/2048px-Emblem_of_Saudi_Arabia.svg.png" alt="السعودية" class="icon-img" title="المملكة العربية السعودية" />
 
-            <!-- السلة -->
             <a href="/checkout/">
                 <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="سلة" class="icon-img" title="سلة الشراء" />
             </a>
 
-            <!-- تسجيل الدخول -->
-            <a href="{% url 'catalog_login' %}" class="login-button">تسجيل الدخول</a>
-
+            <a href="/login/" class="login-button">تسجيل الدخول</a>
         </div>
 
     </div>
