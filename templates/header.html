@@ -1,44 +1,96 @@
-<header style="background-color: #ffffff; border-bottom: 1px solid #eee; padding: 10px 0;">
+{% load static %}
+<header style="background-color: #ffffff; border-bottom: 1px solid #eee; padding: 15px 0;" dir="rtl">
     <style>
-        a {
-            transition: all 0.3s ease;
+        .nav-container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .nav-right, .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .login-button {
+            background-color: #d40000;
+            color: white;
+            padding: 8px 18px;
+            border: none;
+            border-radius: 6px;
             text-decoration: none;
-            color: #333;
-            padding: 10px 15px;
-            display: inline-block;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
         }
 
-        a:hover {
-            color: #007BFF;
-            border-bottom: 2px solid #007BFF;
+        .login-button:hover {
+            background-color: #a30000;
         }
 
-        ul {
+        nav ul {
             list-style: none;
             display: flex;
+            gap: 20px;
             margin: 0;
             padding: 0;
         }
 
-        li {
-            margin: 0 5px;
+        nav a {
+            color: #333;
+            text-decoration: none;
+            font-size: 15px;
+            padding: 8px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 120px;
+        }
+
+        .icon-img {
+            width: 24px;
+            height: 24px;
         }
     </style>
 
-    <div style="max-width: 1200px; margin: auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
-        
-        <!-- الشعار -->
-        <div style="font-size: 20px; font-weight: bold; color: #333;">
-            📱 متجر الجوالات
+    <div class="nav-container">
+
+        <!-- ✅ اليسار: الشعار -->
+        <div class="logo">
+            <img src="{% static 'gawal1.png' %}" alt="شعار عالم الجوال" style="background-color: transparent; border: none;">
         </div>
 
-        <!-- روابط التنقل -->
+        <!-- ✅ الوسط: روابط التنقل -->
         <nav>
             <ul>
                 <li><a href="/">الرئيسية</a></li>
-                <li><a href="/checkout/">الدفع</a></li>
-                <li><a href="/dashboard/">لوحة التحكم</a></li>
             </ul>
         </nav>
+
+        <!-- ✅ اليمين: تسجيل الدخول + السلة + العلم -->
+        <div class="nav-left">
+
+            <!-- علم السعودية -->
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Emblem_of_Saudi_Arabia.svg/2048px-Emblem_of_Saudi_Arabia.svg.png" alt="السعودية" class="icon-img" title="المملكة العربية السعودية" />
+
+            <!-- السلة -->
+            <a href="/checkout/">
+                <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="سلة" class="icon-img" title="سلة الشراء" />
+            </a>
+
+            <!-- تسجيل الدخول -->
+            <a href="{% url 'catalog_login' %}" class="login-button">تسجيل الدخول</a>
+
+        </div>
+
     </div>
 </header>
