@@ -61,6 +61,13 @@
             height: 20px;
             margin-top: 3px;
         }
+
+        .user-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
     </style>
 
     <div class="nav-container">
@@ -75,7 +82,7 @@
             <ul>
                 <li><a href="/">الرئيسية</a></li>
                 <li><a href="/bestsellers/">الأكثر مبيعًا</a></li>
-                <li><a href="/about/">من نحن</a></li>
+                <li><a href="{% url 'about' %}">من نحن</a></li>
                 <li>
                     <a href="/search/">
                         <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="بحث" class="search-icon" title="بحث">
@@ -84,15 +91,23 @@
             </ul>
         </nav>
 
-        <!-- ✅ اليسار: تسجيل الدخول + السلة + علم السعودية -->
+        <!-- ✅ اليسار: تسجيل الدخول أو حسابي + السلة + علم السعودية -->
         <div class="nav-left">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Emblem_of_Saudi_Arabia.svg/2048px-Emblem_of_Saudi_Arabia.svg.png" alt="السعودية" class="icon-img" title="المملكة العربية السعودية" />
+            <img src="{% static 'maa7.png' %}" alt="السعودية" class="icon-img" title="المملكة العربية السعودية" />
 
             <a href="/checkout/">
                 <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="سلة" class="icon-img" title="سلة الشراء" />
             </a>
 
-            <a href="/login/" class="login-button">تسجيل الدخول</a>
+            {% if user.is_authenticated %}
+                <!-- أيقونة حسابي فقط عند تسجيل الدخول -->
+                <a href="#" title="حسابي">
+                    <img src="{% static 'maa10.png' %}" alt="حسابي" class="user-icon" />
+                </a>
+            {% else %}
+                <!-- زر تسجيل الدخول فقط لغير المسجلين -->
+                <a href="{% url 'login' %}" class="login-button">تسجيل الدخول</a>
+            {% endif %}
         </div>
 
     </div>

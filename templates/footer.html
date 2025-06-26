@@ -1,3 +1,6 @@
+{% load static %}
+
+
 <footer style="background-color: #f9f9f9; padding: 40px 20px; font-family: 'Segoe UI', sans-serif; border-top: 1px solid #ddd;">
     <div style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px;">
 
@@ -37,15 +40,15 @@
                 <h3>طرق الدفع</h3>
                 <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="Visa" style="width: 50px; margin: 5px;">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Mastercard-logo.png" alt="MasterCard" style="width: 50px; margin: 5px;">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Apple_Pay_logo.svg" alt="Apple Pay" style="width: 60px; margin: 5px;">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Google_Pay_Logo.svg" alt="Google Pay" style="width: 60px; margin: 5px;">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Mada_Logo.svg" alt="Mada" style="width: 60px; margin: 5px;">
+                <img src="{% static 'maa4.png' %}" alt="Apple Pay" style="width: 60px; margin: 5px;">
+                <img src="{% static 'maa5.png' %}" alt="Google Pay" style="width: 60px; margin: 5px;">
+                <img src="{% static 'maa6.jpg' %}" alt="Mada" style="width: 60px; margin: 5px;">
             </div>
 
             <div>
                 <h3>تحميل التطبيق</h3>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" style="width: 130px; margin: 5px;">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Download_on_the_App_Store_Badge.svg" alt="App Store" style="width: 120px; margin: 5px;">
+                <img src="{% static 'maa2.png' %}" alt="Google Play" style="width: 130px; margin: 5px;">
+                <img src="{% static 'maa3.png' %}" alt="App Store" style="width: 120px; margin: 5px;">
             </div>
         </div>
     </div>

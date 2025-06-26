@@ -33,3 +33,8 @@ def register_view(request):
         print(username, email)  # فقط للعرض حالياً
         return redirect('/')  # يرجع للرئيسية بعد التسجيل
     return render(request, 'catalog/register.html')
+
+
+
+def about(request):
+    return render(request, 'catalog/about.html')

@@ -1,3 +1,5 @@
+{% load static %}
+
 {% include "header.html" %}
 
 <style>
@@ -75,7 +77,7 @@
         <!-- هواوي -->
         <div>
             <a href="#">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/0/00/Huawei_Standard_logo.svg" alt="Huawei" style="width: 80px; height: 80px; object-fit: contain;">
+                <img src="{% static 'maa2.png' %}" alt="Huawei" style="width: 80px; height: auto;">
                 <p style="margin-top: 10px;">جوالات هواوي</p>
             </a>
         </div>
@@ -85,3 +87,4 @@
 
 
 {% include "footer.html" %}
+
