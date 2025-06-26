@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # ✅ الصفحة الرئيسية
 def home(request):
@@ -38,3 +39,10 @@ def register_view(request):
 
 def about(request):
     return render(request, 'catalog/about.html')
+
+
+
+
+@login_required
+def profile(request):
+    return render(request, 'catalog/profile.html')

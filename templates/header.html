@@ -1,28 +1,44 @@
 {% load static %}
-<header style="background-color: #ffffff; border-bottom: 1px solid #eee; padding: 15px 0;" dir="rtl">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عالم الجوال</title>
     <style>
+        /* Reset بسيط */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+        }
+
         .nav-container {
             max-width: 1200px;
             margin: auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 20px;
-            font-family: 'Segoe UI', sans-serif;
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            background-color: #fff;
         }
 
         .nav-left, .nav-right {
             display: flex;
             align-items: center;
             gap: 15px;
+            position: relative;
         }
 
         nav ul {
             list-style: none;
             display: flex;
             gap: 20px;
-            margin: 0;
-            padding: 0;
         }
 
         nav a {
@@ -48,7 +64,7 @@
         }
 
         .logo img {
-            height: 120px;
+            height: 100px;
         }
 
         .icon-img {
@@ -67,48 +83,106 @@
             height: 40px;
             border-radius: 50%;
             object-fit: cover;
+            cursor: pointer;
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: none;
+            flex-direction: column;
+            min-width: 140px;
+            z-index: 1000;
+        }
+
+        .dropdown a {
+            padding: 10px;
+            text-align: right;
+            color: #333;
+            font-size: 14px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown a:hover {
+            background-color: #f5f5f5;
         }
     </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
 
-    <div class="nav-container">
+            <!-- يمين: الشعار -->
+            <div class="logo">
+                <img src="{% static 'gawal1.png' %}" alt="شعار عالم الجوال">
+            </div>
 
-        <!-- ✅ يمين: الشعار -->
-        <div class="logo">
-            <img src="{% static 'gawal1.png' %}" alt="شعار عالم الجوال" style="background-color: transparent; border: none;">
-        </div>
+            <!-- الوسط: روابط التنقل -->
+            <nav>
+                <ul>
+                    <li><a href="/">الرئيسية</a></li>
+                    <li><a href="/bestsellers/">الأكثر مبيعًا</a></li>
+                    <li><a href="{% url 'about' %}">من نحن</a></li>
+                    <li>
+                        <a href="/search/">
+                            <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="بحث" class="search-icon" title="بحث">
+                        </a>
+                    </li>
+                </ul>
+            </nav>
 
-        <!-- ✅ الوسط: روابط إضافية -->
-        <nav>
-            <ul>
-                <li><a href="/">الرئيسية</a></li>
-                <li><a href="/bestsellers/">الأكثر مبيعًا</a></li>
-                <li><a href="{% url 'about' %}">من نحن</a></li>
-                <li>
-                    <a href="/search/">
-                        <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="بحث" class="search-icon" title="بحث">
-                    </a>
-                </li>
-            </ul>
-        </nav>
+            <!-- يسار: أيقونات -->
+            <div class="nav-left">
+                <img src="{% static 'maa7.png' %}" alt="السعودية" class="icon-img" title="المملكة العربية السعودية" />
 
-        <!-- ✅ اليسار: تسجيل الدخول أو حسابي + السلة + علم السعودية -->
-        <div class="nav-left">
-            <img src="{% static 'maa7.png' %}" alt="السعودية" class="icon-img" title="المملكة العربية السعودية" />
-
-            <a href="/checkout/">
-                <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="سلة" class="icon-img" title="سلة الشراء" />
-            </a>
-
-            {% if user.is_authenticated %}
-                <!-- أيقونة حسابي فقط عند تسجيل الدخول -->
-                <a href="#" title="حسابي">
-                    <img src="{% static 'maa10.png' %}" alt="حسابي" class="user-icon" />
+                <a href="/checkout/">
+                    <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="سلة" class="icon-img" title="سلة الشراء" />
                 </a>
-            {% else %}
-                <!-- زر تسجيل الدخول فقط لغير المسجلين -->
-                <a href="{% url 'login' %}" class="login-button">تسجيل الدخول</a>
-            {% endif %}
-        </div>
 
-    </div>
-</header>
+                {% if user.is_authenticated %}
+                    <!-- صورة المستخدم مع القائمة المنسدلة -->
+                    <div style="position: relative;">
+                        <img src="{% static 'maa10.png' %}" alt="حسابي" class="user-icon" id="user-icon">
+                        <div class="dropdown" id="user-dropdown">
+                            <a href="{% url 'profile' %}">ملفي الشخصي</a>
+                            <form method="post" action="{% url 'logout' %}">
+                                {% csrf_token %}
+                                <button type="submit" style="background:none;border:none;width:100%;text-align:right;padding:10px;cursor:pointer;font-size:14px;">تسجيل الخروج</button>
+                            </form>
+                        </div>
+                    </div>
+                {% else %}
+                    <!-- زر تسجيل الدخول -->
+                    <a href="{% url 'login' %}" class="login-button">تسجيل الدخول</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <script>
+        const icon = document.getElementById("user-icon");
+        const dropdown = document.getElementById("user-dropdown");
+
+        if (icon) {
+            icon.addEventListener("click", () => {
+                dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
+            });
+
+            window.addEventListener("click", (e) => {
+                if (!icon.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.style.display = "none";
+                }
+            });
+        }
+    </script>
+</body>
+</html>
