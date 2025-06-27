@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>عالم الجوال</title>
     <style>
-        /* Reset بسيط */
         * {
             margin: 0;
             padding: 0;
@@ -14,13 +13,14 @@
         }
 
         body {
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
         }
 
         .nav-container {
             max-width: 1200px;
             margin: auto;
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
             padding: 15px 20px;
@@ -39,6 +39,7 @@
             list-style: none;
             display: flex;
             gap: 20px;
+            flex-wrap: wrap;
         }
 
         nav a {
@@ -65,6 +66,7 @@
 
         .logo img {
             height: 100px;
+            max-width: 100%;
         }
 
         .icon-img {
@@ -100,20 +102,40 @@
             z-index: 1000;
         }
 
-        .dropdown a {
+        .dropdown a, .dropdown button {
             padding: 10px;
             text-align: right;
             color: #333;
             font-size: 14px;
             border-bottom: 1px solid #eee;
+            background: none;
+            border: none;
+            cursor: pointer;
         }
 
-        .dropdown a:last-child {
+        .dropdown a:last-child, .dropdown button:last-child {
             border-bottom: none;
         }
 
-        .dropdown a:hover {
+        .dropdown a:hover, .dropdown button:hover {
             background-color: #f5f5f5;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .nav-left {
+                align-self: flex-end;
+            }
         }
     </style>
 </head>
@@ -121,12 +143,12 @@
     <header>
         <div class="nav-container">
 
-            <!-- يمين: الشعار -->
+            <!-- الشعار -->
             <div class="logo">
                 <img src="{% static 'gawal1.png' %}" alt="شعار عالم الجوال">
             </div>
 
-            <!-- الوسط: روابط التنقل -->
+            <!-- روابط التنقل -->
             <nav>
                 <ul>
                     <li><a href="/">الرئيسية</a></li>
@@ -140,28 +162,27 @@
                 </ul>
             </nav>
 
-            <!-- يسار: أيقونات -->
+            <!-- الأيقونات -->
             <div class="nav-left">
                 <img src="{% static 'maa7.png' %}" alt="السعودية" class="icon-img" title="المملكة العربية السعودية" />
 
-                <a href="/checkout/">
+                <a href="{% url 'cart_detail' %}">
                     <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="سلة" class="icon-img" title="سلة الشراء" />
                 </a>
 
                 {% if user.is_authenticated %}
-                    <!-- صورة المستخدم مع القائمة المنسدلة -->
+                    <!-- صورة الحساب -->
                     <div style="position: relative;">
                         <img src="{% static 'maa10.png' %}" alt="حسابي" class="user-icon" id="user-icon">
                         <div class="dropdown" id="user-dropdown">
                             <a href="{% url 'profile' %}">ملفي الشخصي</a>
                             <form method="post" action="{% url 'logout' %}">
                                 {% csrf_token %}
-                                <button type="submit" style="background:none;border:none;width:100%;text-align:right;padding:10px;cursor:pointer;font-size:14px;">تسجيل الخروج</button>
+                                <button type="submit">تسجيل الخروج</button>
                             </form>
                         </div>
                     </div>
                 {% else %}
-                    <!-- زر تسجيل الدخول -->
                     <a href="{% url 'login' %}" class="login-button">تسجيل الدخول</a>
                 {% endif %}
             </div>
@@ -172,7 +193,7 @@
         const icon = document.getElementById("user-icon");
         const dropdown = document.getElementById("user-dropdown");
 
-        if (icon) {
+        if (icon && dropdown) {
             icon.addEventListener("click", () => {
                 dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
             });

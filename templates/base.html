@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}عالم الجوال{% endblock %}</title>
+
+    <!-- CSS الأساسي -->
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background-color: #1a237e;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer {
+            background-color: #1a237e;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 14px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        main {
+            padding: 30px 20px;
+            min-height: 70vh;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ✅ الشريط العلوي -->
+    <header>
+        <h1>🌐 عالم الجوال</h1>
+    </header>
+
+    <!-- ✅ المحتوى الرئيسي -->
+    <main>
+        {% block content %}
+        <!-- يتم استبداله في الصفحات الأخرى -->
+        {% endblock %}
+    </main>
+
+    <!-- ✅ الشريط السفلي -->
+    <footer>
+        &copy; 2025 عالم الجوال - جميع الحقوق محفوظة
+    </footer>
+
+</body>
+</html>

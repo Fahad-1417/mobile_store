@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="padding: 20px;">
+    <h2>سلة المشتريات</h2>
+    {% if items %}
+        <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+                <th>المنتج</th>
+                <th>الكمية</th>
+                <th>السعر</th>
+                <th>الإجمالي</th>
+            </tr>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.product.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.product.price }} ر.س</td>
+                <td>{{ item.total_price }} ر.س</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <h3>المجموع الكلي: {{ total }} ر.س</h3>
+    {% else %}
+        <p>سلة المشتريات فارغة.</p>
+    {% endif %}
+</div>
+{% endblock %}
